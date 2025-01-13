@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "LlamaExtension",
+    "version": "1.0.0",
+
+    "content_scripts": [
+        {
+            "matches": [ "<all_urls>" ]
+        }
+    ],
+
+    "browser_action": {
+        "browser_style": true,
+        "default_icon": {
+            "48": "/icon.png"
+        },
+        "default_title": "LlamaExtension",
+        "default_popup": "/popup.html"
+    },
+
+    "permissions": [
+        "storage"
+    ]
+}
