@@ -14,8 +14,8 @@ Ensure you have the following installed on your system:
 
 1. **Clone the Repository**
    Clone this repository to your local machine:
-   ```git clone https://github.com/shaun-dalco/llama-extension.git
-   cd your-repository```
+   ```git clone https://github.com/shaun-dalco/llama-extension.git```
+   ```cd your-repository```
 
 2. ```npm install express node-fetch```
 
