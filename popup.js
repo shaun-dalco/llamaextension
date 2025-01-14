@@ -77,7 +77,7 @@ document.getElementById("fetchButton").addEventListener("click", async () => {
   browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       browser.tabs.executeScript(tabs[0].id, { code: "document.documentElement.outerHTML;" })
           .then((results) => {
-            document.getElementById("html-code").textContent = extractVisibleTextFromHTML(results[0]);
+            //document.getElementById("html-code").textContent = extractVisibleTextFromHTML(results[0]);
             queryOllama("Here is all the visible text of a website, please summarize it: "+extractVisibleTextFromHTML(results[0]));
           })
           .catch((error) => console.error("Error fetching HTML:", error));

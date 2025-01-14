@@ -6,21 +6,25 @@
         <style>
             body {
                 padding: 1em;
+                background-image: url('background.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100% 100%;
+                
             }
-            input {
-                margin-left: 1em;
+            h3 {text-align: center;}
+            #fetchButton {
+                text-align: center;
             }
         </style>
     </head>
     <body>
-        <button id="fetchButton">Click Me!</button> 
+        <button id="fetchButton">Analyse webpage</button> 
         <label>
             <input type="text" id="textInput" placeholder="Type something and press Enter">
         </label>
         <script src="popup.js"></script>
-        <pre id="response"></pre>
-
-        <h3>Page HTML</h3>
-        <textarea id="html-code" readonly></textarea>
+        <h3>AI</h3>
+        <textarea id="response" readonly></textarea>
     </body>
 </html>
