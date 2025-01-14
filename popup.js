@@ -47,3 +47,39 @@ async function queryOllama(prompt) {
     xhr.send(JSON.stringify({ prompt }));
   
 }
+
+function extractVisibleTextFromHTML(htmlContent) {
+  // Create a new DOM parser
+  const parser = new DOMParser();
+  
+  // Parse the HTML content into a document
+  const doc = parser.parseFromString(htmlContent, "text/html");
+  
+  // Function to extract visible text from nodes
+  function extractText(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+          return node.textContent.trim();
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const style = window.getComputedStyle(node);
+          if (style.display === "none" || style.visibility === "hidden") {
+              return ""; // Ignore hidden elements
+          }
+          return Array.from(node.childNodes).map(extractText).join(" ");
+      }
+      return "";
+  }
+  
+  // Extract text from the <body> element
+  return extractText(doc.body).replace(/\s+/g, " ").trim();
+}
+
+document.getElementById("fetchButton").addEventListener("click", async () => {
+  browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      browser.tabs.executeScript(tabs[0].id, { code: "document.documentElement.outerHTML;" })
+          .then((results) => {
+            document.getElementById("html-code").textContent = extractVisibleTextFromHTML(results[0]);
+            queryOllama("Here is all the visible text of a website, please summarize it: "+extractVisibleTextFromHTML(results[0]));
+          })
+          .catch((error) => console.error("Error fetching HTML:", error));
+  });
+});
